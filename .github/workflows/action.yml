@@ -5,6 +5,7 @@ on:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     steps:
       - name: Touch file
         run: touch test.txt
