@@ -1,0 +1,16 @@
+name: Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Touch file
+        run: touch ${{ env.FILE_NAME }}
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: "r2 object put ${{ env.BUCKET_NAME }}/${{ env.FILE_NAME }} --file ${{ env.FILE_NAME }}"
