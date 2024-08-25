@@ -5,12 +5,11 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
     steps:
       - name: Touch file
-        run: touch ${{ env.FILE_NAME }}
+        run: touch test.txt
       - name: Deploy to Cloudflare
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: "r2 object put ${{ env.BUCKET_NAME }}/${{ env.FILE_NAME }} --file ${{ env.FILE_NAME }}"
+          command: "r2 object put test/test.txt --file test.txt"
